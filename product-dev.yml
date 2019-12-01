@@ -1,0 +1,6 @@
+application:
+  message: Hello world
+  options:
+    product_prefix: 'NShopping - '
+    
+    
