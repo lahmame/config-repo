@@ -1,3 +1,6 @@
+server:
+  
+
 application:
   message: Hello world
   options:
