@@ -72,45 +72,6 @@ Ci-dessous le modèle standard Wafa :
 
 ![Wafa Standard Pipeline](pipeline.png)
 
-* __Phase Commit__ :
-	* __Responsabilités__
-		* Compilation / TU / Packaging
-		* Analyse static de qualité
-		* Deployment de l'artifact dans Nexus
-		* Publication des rapport
-	* __Quand__
-		* A chaque commit sur toutes les branches
-	* __Output__
-		* Rapport des tests / de qualité
-		* Publication des artifacts binaires.
-		
-* __Phase Acceptance__ :
-	* __Responsabilités__
-		* Tests d'acceptance Fonctionnels (Automated / Manual)§
-	* __Quand__
-		* A commit dans __develop__
-	* __Output__
-		* Release candidate created
-
-* __Phase Staging__ :
-	* __Responsabilités__
-		* Tests Non Fonctionnels (Performance, Security, Scallability, ...) §
-		* Tests exploratoires
-	* __Quand__
-		* A commit dans __release-...__
-	* __Output__
-		* Merge request to master created
-
-* __Phase Deploy__ :
-	* __Responsabilités__
-		* Deploiement en prod
-		* Smock tests
-		* Notification des parties prenantes 
-	* __Quand__
-		* A chaque commit dans __master__
-	* __Output__
-		* Application deployée en production
-
 > § 
 	* Provisionning des environnements
 		* Déploiement en environnement de tests
