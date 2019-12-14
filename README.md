@@ -1,7 +1,7 @@
 ## Jenkins : Normes d'utilisatation
 
 ### Introduction
-Ce guide présente les normes d'utilisation de Jenkins Wafa (Wafa CI, Wafa CI est la plateforme d'intégration continue qui intégrer les changements effectués par les développeurs). Il fournit une sélection des bonnes pratiques de création des pipelines et souligne les erreurs les plus courantes.
+Ce guide présente les normes d'utilisation de Jenkins Wafa (Wafa CI, c'est la plateforme d'intégration continue qui intégre les changements effectués par les développeurs). Il fournit une sélection de pattern et d'anti-pattern autour de la manipulation des pipelines.
 
 Le but est de diriger les développeurs vers des modèles qui aboutissent à une meilleure exécution de la pipeline et à s'éloigner des pièges dont ils pourraient ne pas être conscients. 
 
@@ -10,13 +10,10 @@ Ce guide n'est pas une liste exhaustive de toutes les bonnes pratiques possibles
 
 ### Authentification
 Pour pouvoir accèder à la plateforme Wafa CI
-La plateforme est interfacée avec l'annuaire entreprise des utilisateurs Active Directory,
-Pour pouvoir accèder à Jenkins, l'utilisateur doit avoir l'un des rôles suivant :
-- Transfo_SI 
+La plateforme est interfacée avec l'annuaire entreprise des utilisateurs Active Directory, Pour pouvoir y accèder, il faut avoir un compte sur AD avec l'un des rôles suivant :
+- Transfo_SI
 - Prestataire
 ...
-
-
 
 ### Organisation des jobs
 
@@ -37,25 +34,34 @@ Les noms de jobs doivent respecter le format suivant : __domaine-application-nam
 ### Regrouper les jobs du même domaine dans un Folder
  
 Pour les équipes (domaines) qui ont plusieurs jobs, il est fortement recommendé de regrouper ces derniers dans un Folder.
-Les Folders permettent de mieux organiser les jobs, réutiliser la gestion de droits et de partager un ensemble credentials réservés au domaine.
+Les Folders permettent de mieux organiser les jobs, réutiliser la gestion des accès et de partager un ensemble credentials réservés au domaine.
 
 Les folders sont gérés par les équipes de développement :
 * Création et mise à jour du folder
 * Création, Configuration, Lancement des Jobs
-* Gestion de la sécurité
-* Gestion des identifiants globaux
+* Gestion de la sécurité (Attribution d'accès a un developpeur)
+* Gestion des identifiants globaux (git, deploiement, sonar, slack, ...)
 
 ### Sécurité des jobs
 
 Les Jobs sont sécurisés en utilisant les matrices d'autorisation globale et de projet.
 
-La matrice globale est gèrée par la cellule d'architecture et permet de spécifier les règles globales d'habilitation. En général, les utilisateurs ne peuvent à ce niveau que créer des nouveau job.
+La matrice globale est gèrée par la cellule d'architecture et permet de spécifier les règles globales d'habilitations. En général, les utilisateurs ne peuvent à ce niveau que créer de nouveau job.
 
 Ensuite, vient la matrice d'autorisation projet qui permet de spécifier les droits d'accès par job ou par Folder (groupe de job)  
 
-
+Les equipes peuvent gerer elles memes les acces aux jobs. 
 
 ### Les identifiants
+
+Jenkins interagit avec plusieurs outils et plateformes securises et qui peuvent exiger des justificatifs d'access (credentials), pour cela, il permet de gerer l'ensemble des identifiant necessaire pour executer les builds interagissant avec ces outils.
+
+Les identifiants requis par les jobs / Pipelines sont geres par l'equipes de developpement au niveau du Folder (SubFolder) regroupant leurs job
+
+Chaque equipe peut creer sont propre utilisateur git "robotops" afin d'effectuer des changes sur les repos git depuis les builds. Elle cree egalement l'identifiant (credential) correspondant sur l'echelle du groupe.
+
+Il est possible de gerer des identifiants partages comme celui qui permet de se connecter a la 1.87 pour effectuer des deploiement mais ils sont strictement gerer par les administrateurs de jenkins).
+
 
 ### Ecriture des pipelines
 #### Modèle de pipeline standard Wafa Wassurance
