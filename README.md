@@ -70,7 +70,7 @@ Les pipelines Wafa Assurance permettent d'intégrer les changements des dévelop
 
 Ci-dessous le modèle standard Wafa :
 
-![](Wafa UDD.png)
+![Wafa Standard Pipeline](pipeline.png)
 
 * __Phase Commit__ :
 	* __Responsabilités__
