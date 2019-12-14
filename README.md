@@ -66,9 +66,11 @@ Il est possible de gerer des identifiants partages comme celui qui permet de se 
 ### Ecriture des pipelines
 #### Modèle de pipeline standard Wafa Wassurance
 
-Les pipelines Wafa Assurance permettant d'intégrer les changements des développeurs en passant par des chaines de validation regroupées en phases ou stages successifs ou parallèle. Chaque stage comporte un ensemble d'actions à effectuer par Jenkins pour aboutir à un résultat intermediaire (deployement du binaire, Rapport de tests, PV de recette, déploiement en prod, ...)
+Les pipelines Wafa Assurance permettent d'intégrer les changements des développeurs en passant par des chaines de validation regroupées en phases ou stages successifs et/ou parallèles. Chaque stage comporte un ensemble d'etapes (actions à effectuer par Jenkins) pour aboutir à un résultat intermediaire (deployement du binaire, Rapport de tests, PV de recette, déploiement en prod, ...)
 
 Ci-dessous le modèle standard Wafa :
+
+![](Wafa UDD.png)
 
 * __Phase Commit__ :
 	* __Responsabilités__
@@ -84,7 +86,7 @@ Ci-dessous le modèle standard Wafa :
 		
 * __Phase Acceptance__ :
 	* __Responsabilités__
-		* Tests d'acceptance Fonctionnels §
+		* Tests d'acceptance Fonctionnels (Automated / Manual)§
 	* __Quand__
 		* A commit dans __develop__
 	* __Output__
@@ -93,6 +95,7 @@ Ci-dessous le modèle standard Wafa :
 * __Phase Staging__ :
 	* __Responsabilités__
 		* Tests Non Fonctionnels (Performance, Security, Scallability, ...) §
+		* Tests exploratoires
 	* __Quand__
 		* A commit dans __release-...__
 	* __Output__
@@ -100,12 +103,9 @@ Ci-dessous le modèle standard Wafa :
 
 * __Phase Deploy__ :
 	* __Responsabilités__
-		* Tests Non Fonctionnels (Performance, Security, Scallability, ...) §
-		* Tests exploratoire manuel §
-		* Sous actions des diffèrents tests 
-			* Provisionning des environnements
-			* Déploiement en environnement de tests
-			* Dérouler les smock tests
+		* Deploiement en prod
+		* Smock tests
+		* Notification des parties prenantes 
 	* __Quand__
 		* A chaque commit dans __master__
 	* __Output__
