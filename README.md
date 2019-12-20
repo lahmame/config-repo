@@ -49,7 +49,6 @@ Les Folder doivent porter le nom du domaine correspondant. _ex : prodOTO, sinIRD
 	* _uaa-dbBackup_ : Représente le job de back de base de données du l'application partagée uaa
 
 #### Sécurité des jobs
-
 Les Jobs sont sécurisés en utilisant les matrices d'autorisation globale et de projet.
 
 La matrice globale est gèrée par la cellule d'architecture et permet de spécifier les règles globales d'habilitations. En général, les utilisateurs ne peuvent à ce niveau que créer de nouveau job.
@@ -59,7 +58,6 @@ Ensuite, vient la matrice d'autorisation projet qui permet de spécifier les dro
 Les equipes peuvent gerer elles memes les acces aux jobs. 
 
 #### Les identifiants
-
 Jenkins interagit avec plusieurs outils et plateformes securises et qui peuvent exiger des justificatifs d'access (credentials), pour cela, il permet de gerer l'ensemble des identifiant necessaire pour executer les builds interagissant avec ces outils.
 
 Les identifiants requis par les jobs / Pipelines sont geres par l'equipes de developpement au niveau du Folder (SubFolder) regroupant leurs job
@@ -87,14 +85,12 @@ Ci-dessous le modèle standard Wafa :
 #### Règles générals :
 
 ##### Utiliser le code Groovy pour connecter les actions
-
 Utilisez le code Groovy pour connecter un ensemble d'actions plutôt que comme fonctionnalité principale de la pipeline. En d'autres termes, au lieu de compter sur la fonctionnalité Pipeline (étapes Groovy ou Pipeline) pour faire avancer le processus de build, utilisez des étapes uniques (telles que sh ) pour accomplir plusieurs parties du build. 
 Au fur et à mesure que la complexité des pipelines augmente (la quantité de code Groovy, le nombre d'étapes utilisées, etc.), nécessitent plus de ressources (CPU, mémoire, stockage) sur le maître. Considérez Pipeline comme un outil pour réaliser un build plutôt que comme le noyau du build.
 
 > Exemple: Utilisation d'une seule étape de génération Maven pour piloter le build via son processus de build / test / déploiement.
 
 ##### Éviter le code Groovy complexe dans les pipelines 
-
 Pour une pipeline, le code Groovy s'exécute toujours sur le maître, ce qui signifie utiliser les ressources du maître (mémoire et CPU). Par conséquent, il est extrêmement important de réduire la quantité de code Groovy exécuté par Pipelines (cela inclut toutes les méthodes appelées sur les classes importées dans Pipelines). 
 
 ##### Réduire la répétition des étapes similaires 
@@ -107,14 +103,12 @@ Exemple: au lieu de créer une série d'étapes echo ou sh , combinez-les en une
 Dans la mesure du possible, évitez les étapes de pipeline personnalisées / écrasées. Le remplacement des étapes de pipeline intégrées consiste à utiliser des bibliothèques partagées pour remplacer les API de pipeline standard comme sh ou timeout . Ce processus est dangereux car les API du pipeline peuvent changer à tout moment, provoquant une rupture du code personnalisé ou des résultats différents de ceux attendus. Lorsque le code personnalisé se casse en raison des modifications de l'API Pipeline, le dépannage est difficile car même si le code personnalisé n'a pas changé, il peut ne pas fonctionner de la même après une mise à jour de l'API. Ainsi, même si le code personnalisé n'a pas changé, cela ne signifie pas qu'après une mise à jour de l'API, il continuera de fonctionner de la même manière
 
 ##### Éviter les gros fichiers de déclaration de variables globales 
-
 Avoir de gros fichiers de déclaration de variables peut nécessiter de grandes quantités de mémoire pour peu ou pas d'avantages, car le fichier est chargé pour chaque Pipeline, que les variables soient nécessaires ou non. Il est recommandé de créer de petits fichiers de variables qui ne contiennent que des variables pertinentes pour l'exécution en cours.
 
 ##### Éviter les très grandes bibliothèques partagées
 L'utilisation de grandes bibliothèques partagées dans les pipelines nécessite d'extraire un très gros fichier avant que le pipeline ne puisse démarrer et charger la même bibliothèque partagée par travail en cours d'exécution, ce qui peut entraîner une surcharge de mémoire et un temps d'exécution plus lent
 
 ##### Options de la pipeline
-
 * Toujours donner un timeout à vos pipeline
 * Désactiver les builds concurrents
 * Supprimer les anciens builds
