@@ -123,8 +123,7 @@ options {
 ```
 
 ### Agents disponibles
-
-Pour une meilleure utilisation des ressources (Memoire, CPU, Disk) les slaves sont instancié sous forme de conteneurs de docker éphémères. Faire tourner un nouveau conteneur prend moins d'une minute. Ainsi, pour chaque build, un nouveau conteneur sera créé, construira le projet et sera détruit.
+Pour une meilleure utilisation des ressources (Memoire, CPU, Disk) les slaves sont instanciés sous forme de conteneurs de docker éphémères. Faire tourner un nouveau conteneur prend moins d'une minute. Ainsi, pour chaque build, un nouveau conteneur sera créé, construira le projet et sera détruit.
 
 Un agent Jenkins nommé __agent1__ est disponible pour exécuter les builds. suivez les bonnes pratiques décrites ci-dessus pour une utilisation de jenkins (master/slaves) optimisée.
 
