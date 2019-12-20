@@ -28,20 +28,25 @@ Les folders sont gérés par les équipes de développement :
 * Gestion de la sécurité (Attribution d'accès a un developpeur)
 * Gestion des identifiants globaux (git, deploiement, sonar, slack, ...)
 
-#### Nommage des Job
+#### Nommage des Jobs
 
 Les noms de jobs doivent respecter le format suivant : __application-name-role__.
 - __application-name__ : Le nom de l'application, ou composant concerné par le job. _ex : wafaoto, rs, sird, vircheq, uaa, rbf, ..._
 - __role__ : L'objectif, intention du build. _ex : pipeline, build, deploy, dbBackup, ..._
 
-Les Folder peuvent porter le nom du domaine correspondant : __domaine__
-- __domaine__ : Le domaine métier à qui appartient le composant concerné par le job _ex : prodOTO, sinIRD, sinAT, shared, ..._
+Les Folder doivent porter le nom du domaine correspondant. _ex : prodOTO, sinIRD, sinAT, shared, ..._
 
 ##### Examples :
 
-- _prodOTO-api-pipeline_ : Représente la pipeline de déploiement de l'api production automobile
-- _sinIRD-sird-deploy_ : Représente le job de déploiement l'application sird domaine sinistre ird
-- _shared-uaa-dbBackup_ : Représente le job de back de base de données du l'application partagée uaa
+* _prodOTO_ : Folder de l'équipe prod auto
+	* _api-pipeline_ : Représente la pipeline de déploiement de l'api production automobile
+	
+* _sinIRD_ : 
+	* _sird-deploy_ : Représente le job de déploiement l'application sird domaine sinistre ird
+	* _sird-restoreDb_ : Représente le job de restauration de la base de l'application sird domaine sinistre ird
+	
+* _shared_
+	* _uaa-dbBackup_ : Représente le job de back de base de données du l'application partagée uaa
 
 ### Sécurité des jobs
 
