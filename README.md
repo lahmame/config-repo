@@ -17,7 +17,7 @@ La plateforme est interfacée avec l'annuaire entreprise des utilisateurs Active
 
 ### Organisation des jobs
 
-### Regrouper les jobs du même domaine dans un Folder
+#### Regrouper les jobs du même domaine dans un Folder
  
 Pour les équipes (domaines) qui ont plusieurs jobs, il est fortement recommendé de regrouper ces derniers dans un Folder.
 Les Folders permettent de mieux organiser les jobs, réutiliser la gestion des accès et de partager un ensemble credentials réservés au domaine.
@@ -48,7 +48,7 @@ Les Folder doivent porter le nom du domaine correspondant. _ex : prodOTO, sinIRD
 * _shared_
 	* _uaa-dbBackup_ : Représente le job de back de base de données du l'application partagée uaa
 
-### Sécurité des jobs
+#### Sécurité des jobs
 
 Les Jobs sont sécurisés en utilisant les matrices d'autorisation globale et de projet.
 
@@ -58,7 +58,7 @@ Ensuite, vient la matrice d'autorisation projet qui permet de spécifier les dro
 
 Les equipes peuvent gerer elles memes les acces aux jobs. 
 
-### Les identifiants
+#### Les identifiants
 
 Jenkins interagit avec plusieurs outils et plateformes securises et qui peuvent exiger des justificatifs d'access (credentials), pour cela, il permet de gerer l'ensemble des identifiant necessaire pour executer les builds interagissant avec ces outils.
 
@@ -67,7 +67,6 @@ Les identifiants requis par les jobs / Pipelines sont geres par l'equipes de dev
 Chaque equipe peut creer sont propre utilisateur git "robotops" afin d'effectuer des changes sur les repos git depuis les builds. Elle cree egalement l'identifiant (credential) correspondant sur l'echelle du groupe.
 
 Il est possible de gerer des identifiants partages comme celui qui permet de se connecter a la 1.87 pour effectuer des deploiement mais ils sont strictement gerer par les administrateurs de jenkins).
-
 
 ### Ecriture des pipelines
 #### Modèle de pipeline standard Wafa Wassurance
@@ -114,9 +113,26 @@ Avoir de gros fichiers de déclaration de variables peut nécessiter de grandes 
 ##### Éviter les très grandes bibliothèques partagées
 L'utilisation de grandes bibliothèques partagées dans les pipelines nécessite d'extraire un très gros fichier avant que le pipeline ne puisse démarrer et charger la même bibliothèque partagée par travail en cours d'exécution, ce qui peut entraîner une surcharge de mémoire et un temps d'exécution plus lent
 
+##### Options de la pipeline
+
+* Toujours donner un timeout à vos pipeline
+* Désactiver les builds concurrents
+* Supprimer les anciens builds
+
+ex :
+```
+options {
+	timeout(time: 1, unit: 'HOURS')
+	disableConcurrentBuilds()
+	buildDiscarder(logRotator(numToKeepStr: '5'))
+}
+```
 
 ### Agents disponibles
 
+Pour une meilleure utilisation des ressources (Memoire, CPU, Disk) les slaves sont instancié sous forme de conteneurs de docker éphémères. Faire tourner un nouveau conteneur prend moins d'une minute. Ainsi, pour chaque build, un nouveau conteneur sera créé, construira le projet et sera détruit.
+
+Un agent Jenkins nommé __agent1__ est disponible pour exécuter les builds. suivez les bonnes pratiques décrites ci-dessus pour une utilisation de jenkins (master/slaves) optimisée.
 
 
 
