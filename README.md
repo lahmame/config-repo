@@ -1,7 +1,7 @@
 ## Jenkins : Normes d'utilisatation
 
 ### Introduction
-Ce guide présente les normes d'utilisation de Jenkins Wafa (Wafa CI, c'est la plateforme d'intégration continue qui intégre les changements effectués par les développeurs). Il fournit une sélection de pattern et d'anti-pattern autour de la manipulation des pipelines.
+Ce guide présente les normes d'utilisation de Jenkins Wafa (Wafa CI, c'est la plateforme d'intégration continue qui intégre les changements effectués par les développeurs). Il fournit une sélection de patterns et d'anti-patterns autour de la manipulation des jobs et principalement les pipelines.
 
 Le but est de diriger les développeurs vers des modèles qui aboutissent à une meilleure exécution de la pipeline et à s'éloigner des pièges dont ils pourraient ne pas être conscients. 
 
@@ -9,27 +9,13 @@ Ce guide n'est pas une liste exhaustive de toutes les bonnes pratiques possibles
 
 
 ### Authentification
-Pour pouvoir accèder à la plateforme Wafa CI
+
 La plateforme est interfacée avec l'annuaire entreprise des utilisateurs Active Directory, Pour pouvoir y accèder, il faut avoir un compte sur AD avec l'un des rôles suivant :
 - Transfo_SI
 - Prestataire
 ...
 
 ### Organisation des jobs
-
-#### Nommage des Job
-
-Les noms de jobs doivent respecter le format suivant : __domaine-application-name-role__.
-
-- __domaine__ : Le domaine métier à qui appartient le composant concerné par le job _ex : prodOTO, sinIRD, sinAT, shared, ..._
-- __application-name__ : Le nom de l'application, ou composant concerné par le job. _ex : wafaoto, rs, sird, vircheq, uaa, rbf, ..._
-- __role__ : L'objectif, intention du build. _ex : pipeline, build, deploy, dbBackup, ..._
-
-##### Examples :
-
-- _prodOTO-api-pipeline_ : Représente la pipeline de déploiement de l'api production automobile
-- _sinIRD-sird-deploy_ : Représente le job de déploiement l'application sird domaine sinistre ird
-- _shared-uaa-dbBackup_ : Représente le job de back de base de données du l'application partagée uaa
 
 ### Regrouper les jobs du même domaine dans un Folder
  
@@ -41,6 +27,21 @@ Les folders sont gérés par les équipes de développement :
 * Création, Configuration, Lancement des Jobs
 * Gestion de la sécurité (Attribution d'accès a un developpeur)
 * Gestion des identifiants globaux (git, deploiement, sonar, slack, ...)
+
+#### Nommage des Job
+
+Les noms de jobs doivent respecter le format suivant : __application-name-role__.
+- __application-name__ : Le nom de l'application, ou composant concerné par le job. _ex : wafaoto, rs, sird, vircheq, uaa, rbf, ..._
+- __role__ : L'objectif, intention du build. _ex : pipeline, build, deploy, dbBackup, ..._
+
+Les Folder peuvent porter le nom du domaine correspondant : __domaine__
+- __domaine__ : Le domaine métier à qui appartient le composant concerné par le job _ex : prodOTO, sinIRD, sinAT, shared, ..._
+
+##### Examples :
+
+- _prodOTO-api-pipeline_ : Représente la pipeline de déploiement de l'api production automobile
+- _sinIRD-sird-deploy_ : Représente le job de déploiement l'application sird domaine sinistre ird
+- _shared-uaa-dbBackup_ : Représente le job de back de base de données du l'application partagée uaa
 
 ### Sécurité des jobs
 
